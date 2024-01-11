@@ -10,9 +10,7 @@ class ImageWrapper:
             self.frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
         else:
             self.frame = frame
-        # 判断 jpg 是 bytes
-        if jpg is not None and isinstance(jpg, bytes):
-            self.jpg = jpg
+        self.jpg = jpg
 
     def toJPEG(self):
         if self.jpg is None:
