@@ -46,7 +46,10 @@ def status():
 
 @app.route('/latest_frame', methods=['GET'])
 def latest_frame_route():
-    frame, jpg = get_latest_frame()
+    raw = get_latest_frame()
+    if raw is None:
+        return Response(None, mimetype='image/jpeg')
+    jpg = raw.toJPEG()
     return Response(jpg, mimetype='image/jpeg')
 
 
