@@ -1,4 +1,4 @@
-.PHONY:
+.PHONY: init bot notify camera services
 
 init:
 	@python3 -m venv .venv
