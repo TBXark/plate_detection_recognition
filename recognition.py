@@ -6,7 +6,7 @@ from onnx import load_onnx_model, rec_by_session
 
 class ImageWrapper:
     def __init__(self, frame, jpg):
-        if frame.shape[-1] == 4:
+        if frame is not None and frame.shape[-1] == 4:
             self.frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
         else:
             self.frame = frame
