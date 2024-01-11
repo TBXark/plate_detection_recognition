@@ -8,11 +8,11 @@ import requests
 from flask import Flask, Response
 
 import config
-from recognition import Recognition
+from recognition import Recognition, ImageWrapper
 
 opt = config.auto_load_config()
 app = Flask(__name__)
-files = os.listdir('./imgs')
+all_files = os.listdir('./imgs')
 file_index = 0
 current_file = None
 
@@ -20,18 +20,18 @@ current_file = None
 def reload_latest_image():
     global current_file, file_index
     while True:
-        with open('./imgs/' + files[file_index], 'rb') as f:
+        with open('./imgs/' + all_files[file_index], 'rb') as f:
             jpg = f.read()
         current_file = jpg
-        file_index = (file_index + 1) % len(files)
+        file_index = (file_index + 1) % len(all_files)
 
 
 def get_latest_frame():
     global current_file
     if current_file is None:
-        return None, None
+        return None
     frame = cv2.imdecode(np.frombuffer(current_file, np.uint8), cv2.IMREAD_COLOR)
-    return frame, current_file
+    return ImageWrapper(frame=frame, jpg=current_file)
 
 
 def send_notify_callback(plates, jpg):

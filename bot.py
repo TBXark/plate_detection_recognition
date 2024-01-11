@@ -8,7 +8,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 
 import config
-from recognition import Recognition
+from recognition import Recognition, ImageWrapper
 from utils import render_caption
 
 
@@ -56,16 +56,15 @@ class RecognitionBot:
     def fetch_image(self):
         jpg = requests.get(self.opt.camera_api).content
         if jpg is None:
-            return None, None
-        frame = cv2.imdecode(np.frombuffer(jpg, np.uint8), cv2.IMREAD_COLOR)
-        return frame, jpg
+            return None
+        return ImageWrapper(frame=None, jpg=jpg)
 
 
 if __name__ == '__main__':
 
     opt = config.auto_load_config()
     rec = Recognition(opt.rec)
-    bot = RecognitionBot(rec, opt.bot)
+    bot = RecognitionBot(rec, opt.bot, opt.alert)
 
     if opt.rec.auto_recognition:
         Thread(target=rec.start, name="rec", args=(bot.fetch_image, bot.notify_callback), daemon=True).start()

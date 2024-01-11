@@ -21,7 +21,6 @@
     "port": 5001
   },
   "alert": {
-    "color_re": null,
-    "number_re": null
+    "caption_re": null
   }
 }

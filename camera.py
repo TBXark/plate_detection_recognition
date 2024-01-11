@@ -7,7 +7,7 @@ import requests
 from flask import Flask, Response
 
 import config
-from recognition import Recognition
+from recognition import Recognition, ImageWrapper
 
 opt = config.auto_load_config()
 app = Flask(__name__)
@@ -22,17 +22,15 @@ def reload_latest_frame():
     while True:
         ret, frame = cap.read()
         if ret is not None:
-            latest_frame = frame
+            latest_frame = frame.copy()
     # cap.release()
 
 
 def get_latest_frame():
     global latest_frame
     if latest_frame is None:
-        return None, None
-    ret, buffer = cv2.imencode(ext='.jpg', img=latest_frame, params=[cv2.IMWRITE_JPEG_QUALITY, 60])
-    jpg = buffer.tobytes()
-    return latest_frame, jpg
+        return None
+    return ImageWrapper(frame=latest_frame, jpg=None)
 
 
 def send_notify_callback(plates, jpg):

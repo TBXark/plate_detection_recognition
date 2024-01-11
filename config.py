@@ -34,8 +34,7 @@ class BotOpt:
 
 class AlertOpt:
     def __init__(self, config):
-        self.color_re = config['color_re']
-        self.number_re = config['number_re']
+        self.caption_re = config['caption_re']
 
 
 class RecognitionOpt:
