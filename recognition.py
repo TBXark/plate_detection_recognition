@@ -4,13 +4,6 @@ import time
 from onnx import load_onnx_model, rec_by_session
 
 
-class RecognitionOpt:
-    def __init__(self, config):
-        self.detect_model = config['detect_model']
-        self.rec_model = config['rec_model']
-        self.img_size = config['img_size']
-        self.auto_recognition = config['auto_recognition']
-
 
 class Recognition:
     def __init__(self, opt):
@@ -64,3 +57,19 @@ class Recognition:
                     callback(plates, jpg)
             except Exception as e:
                 print(e)
+
+if __name__ == '__main__':
+    import os
+    from config import RecognitionOpt
+    opt = RecognitionOpt({
+        'detect_model': 'weights/plate_detect.onnx',
+        'rec_model': 'weights/plate_rec_color.onnx',
+        'img_size': 640,
+        'auto_recognition': True
+    })
+    rec = Recognition(opt)
+    files = os.listdir('imgs')
+    for file in files:
+        img = cv2.imread('imgs/' + file)
+        plates = rec.get_plates(img)
+        print(plates)

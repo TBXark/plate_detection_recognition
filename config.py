@@ -1,8 +1,6 @@
 import argparse
 import json
 
-from recognition import RecognitionOpt
-
 
 class ConfigOpt:
     def __init__(self, config):
@@ -39,3 +37,11 @@ class RecBotOpt:
         self.telegram_chat_id = config['telegram_chat_id']
         self.camera_api = config['camera_api']
         self.alert_color = config['alert_color']
+
+class RecognitionOpt:
+    def __init__(self, config):
+        self.detect_model = config['detect_model']
+        self.rec_model = config['rec_model']
+        self.img_size = config['img_size']
+        self.auto_recognition = config['auto_recognition']
+
