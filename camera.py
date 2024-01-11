@@ -22,7 +22,7 @@ def reload_latest_frame():
     while True:
         ret, frame = cap.read()
         if ret is not None:
-            latest_frame = frame.copy()
+            latest_frame = frame
     # cap.release()
 
 

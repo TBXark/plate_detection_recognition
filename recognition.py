@@ -56,6 +56,8 @@ class Recognition:
         while True:
             try:
                 img_obj = fetch_image()
+                if img_obj is None:
+                    continue
                 frame = img_obj.toFrame()
                 if frame is None:
                     continue
