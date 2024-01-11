@@ -14,11 +14,14 @@
   "bot": {
     "telegram_token": "",
     "telegram_chat_id": [],
-    "camera_api": "http://localhost:5000/latest_frame",
-    "alert_color": "白色"
+    "camera_api": "http://localhost:5000/latest_frame"
   },
   "notify": {
     "host": "localhost",
     "port": 5001
+  },
+  "alert": {
+    "color_re": null,
+    "number_re": null
   }
 }
