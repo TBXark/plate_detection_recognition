@@ -1,0 +1,24 @@
+{
+  "rec": {
+    "detect_model": "weights/plate_detect.onnx",
+    "rec_model": "weights/plate_rec_color.onnx",
+    "img_size": 640,
+    "auto_recognition": true
+  },
+  "camera": {
+    "host": "localhost",
+    "port": 5000,
+    "camera": "/dev/video1",
+    "notify_api": "http://localhost:5001/notify"
+  },
+  "bot": {
+    "telegram_token": "",
+    "telegram_chat_id": [],
+    "camera_api": "http://localhost:5000/latest_frame",
+    "alert_color": "白色"
+  },
+  "notify": {
+    "host": "localhost",
+    "port": 5001
+  }
+}
