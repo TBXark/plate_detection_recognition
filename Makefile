@@ -14,4 +14,4 @@ camera:
 	@.venv/bin/python3 camera.py
 
 services:
-	@sudo cp services/* /etc/systemd/system/
+	@cp services/* /etc/systemd/system/
