@@ -1,0 +1,13 @@
+[Unit]
+Description=Rec Bot
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Restart=on-failure
+RestartSec=5s
+ExecStart=/root/plate_detection_recognition/.venv/bin/python /root/plate_detection_recognition/bot.py --config /root/plate_detection_recognition/config.json
+
+[Install]
+WantedBy=multi-user.target
