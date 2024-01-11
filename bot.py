@@ -57,8 +57,7 @@ class RecognitionBot:
         jpg = requests.get(self.opt.camera_api).content
         if jpg is None:
             return None
-        img_array = np.array(bytearray(jpg), dtype=np.uint8)
-        return ImageWrapper(frame=None, jpg=img_array)
+        return ImageWrapper(frame=None, jpg=jpg)
 
 
 if __name__ == '__main__':

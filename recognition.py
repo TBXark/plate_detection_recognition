@@ -1,6 +1,8 @@
 import cv2
 import time
 
+import numpy as np
+
 from onnx import load_onnx_model, rec_by_session
 
 
@@ -19,7 +21,10 @@ class ImageWrapper:
 
     def toFrame(self):
         if self.frame is None:
-            frame = cv2.imdecode(self.jpg, cv2.IMREAD_COLOR)
+            img_np = self.jpg
+            if self.jpg is not None and isinstance(self.jpg, bytes):
+                img_np = np.array(bytearray(self.jpg), dtype=np.uint8)
+            frame = cv2.imdecode(img_np, cv2.IMREAD_COLOR)
             if frame.shape[-1] == 4:
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
             self.frame = frame
