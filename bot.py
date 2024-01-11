@@ -44,9 +44,9 @@ class RecognitionBot:
     async def current_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         if not self.is_valid_chat_id(update.message.chat_id):
             return
-        frame, jpg = self.fetch_image()
-        plates = self.rec.get_plates(frame)
-        await self.send_plate_alert_to_telegram(plates, jpg, update.message.chat_id)
+        raw = self.fetch_image()
+        plates = self.rec.get_plates(raw.toFrame())
+        await self.send_plate_alert_to_telegram(plates, raw.toJPEG(), update.message.chat_id)
 
     async def start_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         if not self.is_valid_chat_id(update.message.chat_id):
