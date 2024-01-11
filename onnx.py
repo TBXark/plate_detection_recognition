@@ -5,7 +5,9 @@ import cv2
 import numpy as np
 import onnxruntime
 
-plate_color_list = ['黑色', '蓝色', '绿色', '白色', '黄色']
+# plate_color_list = ['黑色', '蓝色', '绿色', '白色', '黄色']
+plate_color_list = ['black', 'blue', 'green', 'white', 'yellow']
+
 plateName = r"#京沪津渝冀晋蒙辽吉黑苏浙皖闽赣鲁豫鄂湘粤桂琼川贵云藏陕甘青宁新学警港澳挂使领民航危0123456789ABCDEFGHJKLMNPQRSTUVWXYZ险品"
 mean_value, std_value = ((0.588, 0.193))  # 识别模型均值标准差
 

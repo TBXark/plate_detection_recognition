@@ -21,7 +21,7 @@ def notify():
     plates = json.loads(request.form['plates'])
     jpg = file.read()
     url = f'https://api.telegram.org/bot{opt.bot.telegram_token}/sendPhoto'
-    caption = utils.render_caption(plates, opt.bot.alert_color)
+    caption = utils.render_caption(plates, opt.alert)
     files = {'photo': ('image.jpg', jpg, 'image/jpeg')}
     for cid in opt.bot.telegram_chat_id:
         data = {'chat_id': cid, 'caption': caption}

@@ -4,10 +4,11 @@ import json
 
 class ConfigOpt:
     def __init__(self, config):
-        self.bot = RecBotOpt(config['bot'])
+        self.bot = BotOpt(config['bot'])
         self.notify = NotifyOpt(config['notify'])
         self.rec = RecognitionOpt(config['rec'])
         self.camera = CameraOpt(config['camera'])
+        self.alert = AlertOpt(config['alert'])
 
 
 class NotifyOpt:
@@ -24,19 +25,18 @@ class CameraOpt:
         self.notify_api = config['notify_api']
 
 
-def auto_load_config() -> ConfigOpt:
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, default='config.json', help='config file')
-    args = parser.parse_args()
-    return ConfigOpt(json.load(open(args.config)))
-
-
-class RecBotOpt:
+class BotOpt:
     def __init__(self, config):
         self.telegram_token = config['telegram_token']
         self.telegram_chat_id = config['telegram_chat_id']
         self.camera_api = config['camera_api']
-        self.alert_color = config['alert_color']
+
+
+class AlertOpt:
+    def __init__(self, config):
+        self.color_re = config['alert_color_re']
+        self.number_re = config['alert_number_re']
+
 
 class RecognitionOpt:
     def __init__(self, config):
@@ -45,3 +45,9 @@ class RecognitionOpt:
         self.img_size = config['img_size']
         self.auto_recognition = config['auto_recognition']
 
+
+def auto_load_config() -> ConfigOpt:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config', type=str, default='config.json', help='config file')
+    args = parser.parse_args()
+    return ConfigOpt(json.load(open(args.config)))

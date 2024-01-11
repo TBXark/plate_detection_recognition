@@ -13,9 +13,10 @@ from utils import render_caption
 
 
 class RecognitionBot:
-    def __init__(self, _rec, _opt):
+    def __init__(self, _rec, _opt, _alert_opt):
         self.rec = _rec
         self.opt = _opt
+        self.alert_opt = _alert_opt
         self.app = Application.builder().token(_opt.telegram_token).build()
 
     def start_bot(self):
@@ -31,7 +32,7 @@ class RecognitionBot:
 
     async def send_plate_alert_to_telegram(self, plates, jpg, chat_id):
         if plates is not None and len(plates) > 0:
-            caption, disable_notification = render_caption(plates, self.opt.alert_color)
+            caption, disable_notification = render_caption(plates, self.alert_opt)
             await self.app.bot.send_photo(chat_id=chat_id, photo=jpg, caption=caption,
                                           disable_notification=disable_notification)
         else:
