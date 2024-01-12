@@ -1,8 +1,6 @@
 import asyncio
 from threading import Thread
 
-import cv2
-import numpy as np
 import requests
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
